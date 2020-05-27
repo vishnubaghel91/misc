@@ -1,5 +1,7 @@
-package com.odp.creational;
+package com.odp.creational.singleton;
 
+import com.odp.creational.singleton.Singleton;
+import com.odp.creational.singleton.SingletonThreadSafe;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.internal.runners.JUnit4ClassRunner;

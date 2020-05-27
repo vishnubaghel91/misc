@@ -1,4 +1,4 @@
-package com.odp.creational;
+package com.odp.creational.singleton;
 
 public class Singleton {
 
