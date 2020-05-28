@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class Utils {
 
@@ -23,6 +25,10 @@ public class Utils {
             }
         }
         return map;
+    }
+
+    public static <E, K> Map<K, List<E>> groupByStream(Iterable<E> iterable, Function<E, K> key) {
+        return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.groupingBy(key));
     }
 
     public static String reverse(String str) {
