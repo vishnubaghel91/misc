@@ -7,6 +7,28 @@ public class LinkedList<E> implements Iterable<E> {
     private Node<E> head;
     private int size = 0;
 
+    @SafeVarargs
+    public static <T> LinkedList<T> of(T... args) {
+        LinkedList<T> linkedList = new LinkedList<>();
+        if (args != null) {
+            for (T arg : args) {
+                linkedList.add(arg);
+            }
+        }
+        return linkedList;
+    }
+
+    public static void main(String[] args) {
+        Node<Integer> node5 = new Node<>(4, null);
+        Node<Integer> node4 = new Node<>(4, node5);
+        Node<Integer> node3 = new Node<>(4, node4);
+        Node<Integer> node2 = new Node<>(4, node3);
+        Node<Integer> node1 = new Node<>(4, node2);
+        node5.next = node2;
+        System.out.println(new LinkedList<Integer>().detectLoop(node1));
+
+    }
+
     public void add(E data) {
         this.head = new Node<>(data, head);
         this.size++;
@@ -14,16 +36,6 @@ public class LinkedList<E> implements Iterable<E> {
 
     public int size() {
         return this.size;
-    }
-
-    public static <T>  LinkedList<T> of(T ... args) {
-        LinkedList<T> linkedList = new LinkedList<>();
-        if (args != null) {
-            for (T arg: args) {
-                linkedList.add(arg);
-            }
-        }
-        return linkedList;
     }
 
     public Boolean contains(E data) {
@@ -37,15 +49,14 @@ public class LinkedList<E> implements Iterable<E> {
         return false;
     }
 
-
     public void reverse() {
-         this.head = this.reverse0(this.head);
+        this.head = this.reverse0(this.head);
     }
 
-    private Node reverse0(Node root) {
+    private Node<E> reverse0(Node<E> root) {
         Node<E> current = root;
         Node<E> prev = null;
-        Node<E> next = null;
+        Node<E> next;
 
         while (current != null) {
             next = current.next;
@@ -76,6 +87,21 @@ public class LinkedList<E> implements Iterable<E> {
         };
     }
 
+    private boolean detectLoop(Node<E> root) {
+        if (null == root)
+            return false;
+
+        Node<E> slower = root;
+        Node<E> faster = root;
+        while (slower != null && faster != null && faster.next != null) {
+            slower = slower.next;
+            faster = faster.next.next;
+            if (slower == faster) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     static class Node<E> {
         private E data;

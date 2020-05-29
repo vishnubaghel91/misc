@@ -27,6 +27,5 @@ public class LinkedListTest {
         Assert.assertEquals(new Integer(1), itr.next());
         Assert.assertEquals(new Integer(2), itr.next());
         Assert.assertEquals(new Integer(3), itr.next());
-
     }
 }
